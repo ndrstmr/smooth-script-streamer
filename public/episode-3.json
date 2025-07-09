@@ -1,0 +1,114 @@
+[
+  {
+    "type": "direction",
+    "text": "[Technischer Intro-Jingle mit Build-Success-Sound]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Herzlich willkommen zur dritten Folge von 'Entwickler-Behörde'! Heute sprechen wir über Testing in der öffentlichen Verwaltung."
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Hallo zusammen! Ein Thema, das oft unterschätzt wird, aber in der Behörden-IT besonders wichtig ist."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Warum ist Testing in Behörden wichtiger als in anderen Bereichen?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Weil Fehler direkte Auswirkungen auf Bürger haben können. Ein Bug in der Steuer-Software oder im Sozialamt-System kann existenziell sein."
+  },
+  {
+    "type": "direction",
+    "text": "[Nachdenkliche Pause]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Das macht Sinn. Welche Testing-Strategien haben sich in deiner Erfahrung bewährt?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Wir setzen auf die klassische Pyramide: Unit Tests für die Logik, Integration Tests für die APIs, und E2E-Tests für kritische User Journeys."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Und wie sieht es mit automatisierten Tests aus? Ist das in Behörden üblich?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Leider noch nicht überall. Viele Behörden testen noch manuell. Aber es bewegt sich was - CI/CD wird langsam Standard."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Was sind die größten Hürden bei der Test-Automatisierung?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Komplexe Legacy-Systeme, die schwer testbar sind. Und manchmal fehlt einfach das Know-how oder die Zeit für die initiale Setup."
+  },
+  {
+    "type": "direction",
+    "text": "[Beide werden lebhafter]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Hast du ein Beispiel für einen besonders kniffligen Testfall?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Oh ja! Wir mussten mal ein System testen, das mit drei verschiedenen Datenbanken synchronisiert. Datenkonsistenz zu testen war ein Alptraum."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Wie habt ihr das gelöst?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Mit Docker-Containern für isolierte Test-Umgebungen und einem ausgeklügelten Setup für Testdaten. Jeder Test bekam eine saubere Umgebung."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Smart! Was ist mit Performance-Testing? Ist das auch ein Thema?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Absolut! Besonders wenn neue Systeme live gehen. Bürgerdienste müssen auch bei hohem Andrang funktionieren."
+  },
+  {
+    "type": "direction",
+    "text": "[Kurze technische Diskussion]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Welche Tools empfiehlst du für Behörden-Testing?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Jest für Unit Tests, Cypress für E2E, und Postman oder Newman für API-Tests. Alles Open Source und gut dokumentiert."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Und für Performance?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "JMeter ist bewährt, k6 ist moderner. Wichtig ist: früh testen, nicht erst kurz vor dem Go-Live."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Perfekt! Das waren wieder sehr praktische Tipps. Vielen Dank!"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Gerne! Nächste Woche geht es um Deployment-Strategien. Bis dahin!"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Freue mich drauf! Tschüss und happy testing!"
+  },
+  {
+    "type": "direction",
+    "text": "[Outro-Musik mit Testing-Success-Sound]"
+  }
+]

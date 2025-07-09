@@ -1,0 +1,98 @@
+[
+  {
+    "type": "direction",
+    "text": "[Intro-Musik: Technischer Jingle mit Code-Compiler-Sound]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Willkommen zurück zu 'Entwickler-Behörde'! Ich bin Andreas und heute geht es um ein spannendes Thema: APIs in der Verwaltung."
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Hallo! Ich bin wieder Achim und freue mich auf unser Gespräch. APIs sind wirklich ein Schlüssel für moderne Verwaltung."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Lass uns direkt einsteigen: Warum sind APIs für Behörden so wichtig?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "APIs ermöglichen es verschiedenen Systemen miteinander zu sprechen. In Behörden haben wir oft viele isolierte Insellösungen, die endlich vernetzt werden müssen."
+  },
+  {
+    "type": "direction",
+    "text": "[Kurze Pause]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Das klingt logisch, aber wo siehst du die größten Herausforderungen?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Sicherheit steht ganz oben. Datenschutz, Authentifizierung, Autorisierung - alles muss wasserdicht sein. Und dann kommt noch die Komplexität der bestehenden Systeme dazu."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Hast du ein konkretes Beispiel aus deiner Praxis?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Ja, wir haben mal eine API für Bürgerdaten entwickelt. Drei verschiedene Altsysteme sollten darüber angebunden werden. Jedes System hatte andere Datenformate und Sicherheitsanforderungen."
+  },
+  {
+    "type": "direction",
+    "text": "[Beide lachen]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Das klingt nach einem Albtraum! Wie habt ihr das gelöst?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Mit viel Geduld und einer sauberen Abstraktionsschicht. Wir haben GraphQL verwendet, um eine einheitliche Abfrage-Schnittstelle zu schaffen."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "GraphQL in der Behörde? Das ist progressiv! Wie war die Reaktion?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Zunächst skeptisch, aber die Flexibilität hat überzeugt. Verschiedene Frontends konnten genau die Daten abfragen, die sie brauchten."
+  },
+  {
+    "type": "direction",
+    "text": "[Musik wird leiser]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Was würdest du Entwicklern raten, die ihre erste Behörden-API entwickeln?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Dokumentation ist alles! Ausführliche API-Docs, Beispiele und am besten eine interaktive Dokumentation mit Swagger oder ähnlichem."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Und Versionierung nicht vergessen, oder?"
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Absolut! Behörden-Systeme laufen oft jahrelang. Backward-Compatibility ist ein Muss."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Vielen Dank für diese wertvollen Einblicke! Das war wieder sehr aufschlussreich."
+  },
+  {
+    "type": "speaker-achim",
+    "text": "Gerne! Nächste Woche sprechen wir über Testing-Strategien in der Verwaltung."
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Darauf freue ich mich schon! Bis dahin, bleibt neugierig!"
+  },
+  {
+    "type": "direction",
+    "text": "[Outro-Musik fade in und out]"
+  }
+]

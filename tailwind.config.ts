@@ -28,40 +28,31 @@ export default {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
-				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))'
+				
+				/* Teleprompter specific colors */
+				teleprompter: {
+					bg: 'hsl(var(--teleprompter-bg))',
+					text: 'hsl(var(--teleprompter-text))',
+					direction: 'hsl(var(--teleprompter-direction))',
 				},
-				destructive: {
-					DEFAULT: 'hsl(var(--destructive))',
-					foreground: 'hsl(var(--destructive-foreground))'
+				speaker: {
+					andreas: 'hsl(var(--speaker-andreas))',
+					achim: 'hsl(var(--speaker-achim))',
 				},
-				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
+				startButton: {
+					DEFAULT: 'hsl(var(--start-button))',
+					hover: 'hsl(var(--start-button-hover))',
 				},
-				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+				focusLine: 'hsl(var(--focus-line))',
+				control: {
+					bg: 'hsl(var(--control-bg))',
+					text: 'hsl(var(--control-text))',
 				},
-				popover: {
-					DEFAULT: 'hsl(var(--popover))',
-					foreground: 'hsl(var(--popover-foreground))'
+				mobileControl: {
+					bg: 'hsl(var(--mobile-control-bg))',
+					text: 'hsl(var(--mobile-control-text))',
 				},
-				card: {
-					DEFAULT: 'hsl(var(--card))',
-					foreground: 'hsl(var(--card-foreground))'
-				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				overlay: 'hsl(var(--overlay))',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

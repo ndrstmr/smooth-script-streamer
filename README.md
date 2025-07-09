@@ -1,73 +1,173 @@
-# Welcome to your Lovable project
+# Teleprompter - State-of-the-Art Web-App
 
-## Project info
+Eine moderne, responsive und barrierefreie Teleprompter Web-App, optimiert für Live-Podcasts und Präsentationen.
 
-**URL**: https://lovable.dev/projects/d4bf397e-b926-47e8-a336-d0d27149b144
+## Features
 
-## How can I edit this code?
+### 🎯 Kernfunktionalitäten
+- **Flüssiges Scrollen**: Sanfte Animation von unten nach oben mit `requestAnimationFrame`
+- **JSON-Skript-Integration**: Dynamisches Laden von Skripten aus externen JSON-Dateien
+- **Responsive Design**: Optimiert für Desktop (320px - 1920px) und Mobile
+- **Dark Mode**: Studio-optimiertes Design (#121212 Hintergrund, #e0e0e0 Text)
+- **Fokuslinie**: Halbtransparente rote Linie zur Markierung des aktuellen Lesepunkts
 
-There are several ways of editing your application.
+### 🎮 Steuerung
+**Desktop:**
+- `Leertaste`: Play/Pause
+- `+/-`: Geschwindigkeit anpassen (0.05 - 1.0)
+- `R`: Zurückspulen zum Anfang
+- `B`: Lesezeichen setzen
 
-**Use Lovable**
+**Mobile:**
+- Touch-optimierte Steuerleiste am unteren Bildschirmrand
+- Runde Buttons für alle Funktionen
+- Backdrop-Filter für modernen Look
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d4bf397e-b926-47e8-a336-d0d27149b144) and start prompting.
+### 🚀 Erweiterte Features
+- **Skript-Auswahl**: Dropdown-Menü für verschiedene JSON-Dateien
+- **Lesezeichen**: Setzen und Navigieren zu bestimmten Positionen
+- **Export/Import**: Skripte als JSON herunterladen/hochladen
+- **Vorschau-Modus**: Statische Anzeige zur Vorbereitung
+- **Einstellungen-Speicherung**: Geschwindigkeit in localStorage
+- **Fehlerbehandlung**: Benutzerfreundliche Fehlermeldungen
 
-Changes made via Lovable will be committed automatically to this repo.
+### ♿ Barrierefreiheit
+- ARIA-Attribute für alle interaktiven Elemente
+- Vollständige Tastatursteuerung
+- Screenreader-optimierte Labels
+- Fokus-Indikatoren für bessere Navigation
 
-**Use your preferred IDE**
+## JSON-Format
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```json
+[
+  {
+    "type": "direction",
+    "text": "[Regieanweisung in eckigen Klammern]"
+  },
+  {
+    "type": "speaker-andreas",
+    "text": "Text des Sprechers Andreas"
+  },
+  {
+    "type": "speaker-achim", 
+    "text": "Text des Sprechers Achim"
+  }
+]
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Unterstützte Sprecher-Typen:
+- `direction`: Regieanweisungen (grau, kursiv, kleiner)
+- `speaker-andreas`: Sprecher Andreas (grün: #76ff03)
+- `speaker-achim`: Sprecher Achim (blau: #40c4ff)
 
-Follow these steps:
+## Installation & Start
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Voraussetzungen
+- Node.js (Version 16 oder höher)
+- npm oder yarn
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Lokale Entwicklung
+```bash
+# Repository klonen
+git clone <repository-url>
+cd teleprompter
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Dependencies installieren
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Entwicklungsserver starten
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Die App ist dann unter `http://localhost:8080` erreichbar.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Produktion
+```bash
+# Build erstellen
+npm run build
 
-**Use GitHub Codespaces**
+# Mit Python-Server testen
+cd dist
+python -m http.server 8000
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Verwendung
 
-## What technologies are used for this project?
+1. **Skript auswählen**: Wählen Sie aus den verfügbaren Skripten oder geben Sie eine eigene URL ein
+2. **Import/Export**: Laden Sie eigene JSON-Dateien hoch oder exportieren Sie bestehende Skripte
+3. **Vorschau**: Nutzen Sie den Vorschau-Modus zur Vorbereitung
+4. **Teleprompter starten**: Klicken Sie auf den grünen Start-Button
+5. **Steuerung**: Nutzen Sie Tastatur (Desktop) oder Touch-Controls (Mobile)
+6. **Lesezeichen**: Setzen Sie Markierungen mit 'B' für wichtige Stellen
 
-This project is built with:
+## Technische Details
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Architektur
+- **React 18** mit TypeScript
+- **Tailwind CSS** für Styling
+- **Radix UI** für accessible Components
+- **Lucide React** für Icons
+- **React Router** für Navigation
 
-## How can I deploy this project?
+### Performance-Optimierungen
+- `will-change: transform` für flüssige Animationen
+- `requestAnimationFrame` für optimales Scrolling
+- Geschwindigkeitsbegrenzung (0.05-1.0) für ältere Geräte
+- Lazy Loading für große Skripte
 
-Simply open [Lovable](https://lovable.dev/projects/d4bf397e-b926-47e8-a336-d0d27149b144) and click on Share -> Publish.
+### Browser-Kompatibilität
+- Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+)
+- Fallbacks für fehlende Features
+- Mobile Browser (iOS Safari, Chrome Mobile)
 
-## Can I connect a custom domain to my Lovable project?
+## Beispiel-Skripte
 
-Yes, you can!
+Die App wird mit drei Beispiel-Episoden geliefert:
+- `script.json`: Erste Folge "Entwickler-Behörde"
+- `episode-2.json`: APIs in der Verwaltung
+- `episode-3.json`: Testing-Strategien
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Anpassungen
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### Neue Sprecher hinzufügen
+1. Farbe in `src/index.css` definieren:
+```css
+--speaker-newname: [HSL-Wert];
+```
+
+2. Farbe in `tailwind.config.ts` einbinden:
+```typescript
+speaker: {
+  newname: 'hsl(var(--speaker-newname))',
+}
+```
+
+3. Typ in Teleprompter-Komponente erweitern
+
+### Styling anpassen
+Alle Farben und Designs sind im Design-System definiert:
+- `src/index.css`: CSS-Variablen
+- `tailwind.config.ts`: Tailwind-Konfiguration
+
+## Troubleshooting
+
+### Häufige Probleme
+- **Skript lädt nicht**: Prüfen Sie die JSON-Syntax und Dateipfade
+- **Animation ruckelt**: Reduzieren Sie die Scrollgeschwindigkeit
+- **Mobile Steuerung reagiert nicht**: Überprüfen Sie Touch-Events im Browser
+
+### Debug-Modus
+Öffnen Sie die Browser-Entwicklertools für detaillierte Logs und Fehlermeldungen.
+
+## Lizenz
+
+Dieses Projekt ist unter der MIT-Lizenz verfügbar.
+
+## Support
+
+Bei Fragen oder Problemen erstellen Sie bitte ein Issue im Repository oder kontaktieren Sie das Entwicklerteam.
+
+---
+
+**Entwickelt für professionelle Podcast-Produktionen und Live-Präsentationen.**

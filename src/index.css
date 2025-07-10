@@ -26,8 +26,8 @@
     /* Controls */
     --control-bg: 0 0% 0%; /* black with alpha */
     --control-text: 0 0% 100%; /* white */
-    --mobile-control-bg: 0 0% 100%; /* white */
-    --mobile-control-text: 0 0% 0%; /* black */
+    --mobile-control-bg: 0 0% 7%; /* dark background */
+    --mobile-control-text: 0 0% 88%; /* light text */
     
     /* Overlays */
     --overlay: 0 0% 0%; /* black with alpha */

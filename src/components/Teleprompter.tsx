@@ -185,7 +185,7 @@ const Teleprompter: React.FC = () => {
       return;
     }
     setIsStarted(true);
-    setIsPlaying(true);
+    setIsPlaying(false); // Start paused, user must press play
   };
 
   const handlePlayPause = () => {

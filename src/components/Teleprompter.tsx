@@ -445,15 +445,17 @@ const Teleprompter: React.FC = () => {
     
     const viewportHeight = window.innerHeight;
     const focusLinePosition = viewportHeight * 0.5; // Red line at 50% viewport height
-    const scriptHeight = scriptRef.current.scrollHeight || scriptRef.current.clientHeight;
+    
+    // Use a consistent script height calculation
+    const scriptElement = scriptRef.current;
+    const scriptHeight = Math.max(scriptElement.scrollHeight, scriptElement.clientHeight);
     
     // Total distance text needs to travel to completely pass the focus line
-    // From initial position (100vh padding) to script end + focus line offset
     const totalScrollDistance = scriptHeight + viewportHeight - focusLinePosition;
     
     if (totalScrollDistance <= 0) return 0;
     
-    // Progress based on how much text has passed the focus line
+    // Progress based on current scroll position
     const progress = (currentPosition / totalScrollDistance) * 100;
     return Math.min(100, Math.max(0, progress));
   };

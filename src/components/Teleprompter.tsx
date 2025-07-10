@@ -439,11 +439,17 @@ const Teleprompter: React.FC = () => {
     );
   }
 
-  // Calculate progress percentage
+  // Calculate progress percentage based on script content
   const getProgress = () => {
     if (!scriptRef.current) return 0;
-    const maxScroll = scriptRef.current.clientHeight - window.innerHeight + 200;
-    return Math.min(100, Math.max(0, (currentPosition / maxScroll) * 100));
+    const scriptHeight = scriptRef.current.scrollHeight || scriptRef.current.clientHeight;
+    const viewportHeight = window.innerHeight;
+    const totalScrollableContent = scriptHeight - viewportHeight;
+    
+    if (totalScrollableContent <= 0) return 0;
+    
+    const progress = (currentPosition / totalScrollableContent) * 100;
+    return Math.min(100, Math.max(0, progress));
   };
 
   return (

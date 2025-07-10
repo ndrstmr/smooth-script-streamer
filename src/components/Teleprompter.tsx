@@ -274,7 +274,7 @@ const Teleprompter: React.FC = () => {
           content = content.replace(/^[^:]*:\s*/, '');
           return (
             <div key={index} className={className}>
-              <span className="font-bold text-speaker-andreas">Andreas:</span>
+              <span className="font-bold text-speaker-andreas">Andreas: </span>
               {content}
             </div>
           );
@@ -284,7 +284,7 @@ const Teleprompter: React.FC = () => {
           content = content.replace(/^[^:]*:\s*/, '');
           return (
             <div key={index} className={className}>
-              <span className="font-bold text-speaker-achim">Achim:</span>
+              <span className="font-bold text-speaker-achim">Achim: </span>
               {content}
             </div>
           );

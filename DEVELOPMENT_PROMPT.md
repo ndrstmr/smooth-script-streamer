@@ -2,7 +2,7 @@
 
 ## Projektübersicht
 
-Entwickle eine professionelle, state-of-the-art Teleprompter Web-Anwendung für Live-Podcasts und Präsentationen. Die App soll flüssiges Scrolling, JSON-basierte Skript-Verwaltung und responsive Design bieten.
+Entwickle eine professionelle, state-of-the-art "Podcast Karaoke" Web-Anwendung mit KI-gestützter Skript-Generierung. Die App kombiniert flüssiges Teleprompter-Scrolling mit Gemini AI für automatische Dialog-Erstellung (10-15 Minuten), Multi-User Sessions und Firebase Backend für kollaborative Podcast-Performances.
 
 ## Technische Grundlagen
 
@@ -13,7 +13,10 @@ Entwickle eine professionelle, state-of-the-art Teleprompter Web-Anwendung für 
 - **Icons**: Lucide React
 - **Routing**: React Router DOM
 - **Animation**: requestAnimationFrame für flüssiges Scrolling
-- **Deployment**: GitHub Pages mit automatischem CI/CD
+- **Backend**: Firebase (Firestore, Authentication, Cloud Functions)
+- **AI Integration**: Google Gemini Pro API für Script-Generierung
+- **Real-time**: Firebase Realtime Database für Multi-User Sessions
+- **Deployment**: GitHub Pages + Firebase Hosting
 
 ### Architektur-Prinzipien
 - Komponenten-basierte Architektur mit klarer Trennung
@@ -21,6 +24,9 @@ Entwickle eine professionelle, state-of-the-art Teleprompter Web-Anwendung für 
 - Design System mit semantischen CSS-Variablen
 - Mobile-First Responsive Design
 - Performance-optimiert mit 60fps Animations
+- AI-First Approach für Content-Generierung
+- Real-time Multi-User Architektur
+- Firebase-basierte Backend Services
 
 ## Entwicklungsschritte
 
@@ -34,6 +40,10 @@ cd smooth-script-streamer
 npm install @radix-ui/react-* lucide-react class-variance-authority
 npm install tailwindcss-animate clsx tailwind-merge
 npm install react-router-dom @types/node
+
+# Firebase & AI Integration
+npm install firebase @google/generative-ai
+npm install @firebase/firestore @firebase/auth @firebase/functions
 
 # Dev Dependencies  
 npm install -D @types/react @types/react-dom eslint typescript
@@ -199,6 +209,20 @@ src/components/
 │   ├── TeleprompterPlayer.tsx
 │   ├── TeleprompterControls.tsx
 │   └── TeleprompterProgressBar.tsx
+├── generator/                    # AI Script Generation
+│   ├── TopicInputWizard.tsx
+│   ├── ScriptGenerationProgress.tsx
+│   ├── GeneratedScriptPreview.tsx
+│   └── ScriptCustomization.tsx
+├── session/                      # Multi-User Features
+│   ├── SessionLobby.tsx
+│   ├── ParticipantView.tsx
+│   ├── SessionDashboard.tsx
+│   └── JoinSessionModal.tsx
+├── analytics/                    # Performance Tracking
+│   ├── PerformanceMetrics.tsx
+│   ├── SessionHistory.tsx
+│   └── ReadingStatistics.tsx
 └── ui/                           # Shadcn Components
 ```
 
@@ -263,26 +287,36 @@ export const useTeleprompterAnimation = ({
 
 ### Phase 5: Features Implementation
 
-#### 5.1 JSON Script Loading
-- Unterstützung für externe JSON-Dateien
-- Fallback-Handling bei Netzwerkfehlern
-- Validierung der Skript-Struktur
-- Dynamic Import für bessere Performance
+#### 5.1 AI Script Generation (Gemini Integration)
+- **Topic Input Wizard**: Benutzerfreundliches Formular für Themeneingabe
+- **Gemini API Integration**: Automatische Dialog-Generierung (10-15 Minuten)
+- **Script Customization**: Länge, Stil (Interview, Debate, Casual), Sprecher-Anzahl
+- **Real-time Generation**: Loading States und Progress Indication
+- **Quality Control**: Script Validation und Verbesserungsvorschläge
 
-#### 5.2 Responsive Controls
-- **Desktop**: Keyboard-Shortcuts (Space, +/-, R, B)
-- **Mobile**: Touch-optimierte Buttons mit Backdrop-Blur
-- **Accessibility**: ARIA-Labels und Focus-Management
+#### 5.2 Multi-User Session Management
+- **Session Creation**: QR-Code/Link Generation für Teilnehmer
+- **Role Assignment**: Automatische oder manuelle Speaker-Zuteilung (Speaker A/B)
+- **Real-time Sync**: Firebase Realtime Database für Live-Sessions
+- **Session States**: Waiting Room, Active Session, Results Dashboard
 
-#### 5.3 Bookmark System
-- localStorage Persistence
-- Navigation zu gespeicherten Positionen
-- Export/Import Funktionalität
+#### 5.3 Firebase Backend Integration
+- **Authentication**: Google/Email Login für personalisierte Erfahrung
+- **Firestore Database**: Generated Scripts, Session History, User Profiles
+- **Cloud Functions**: Gemini API Calls, Script Processing, Session Management
+- **Security Rules**: User-basierte Datengrenzsteuerung
 
-#### 5.4 Progress Tracking
-- Visuelle Fortschrittsanzeige
-- Position-basierte Berechnung
-- Responsive Updates während Playback
+#### 5.4 Performance Analytics
+- **Reading Performance**: WPM tracking, Pause analysis, Fluency scoring
+- **Session Recording**: Performance comparison zwischen Teilnehmern
+- **Progress Tracking**: Verbesserung über Zeit, Personal Bests
+- **Social Features**: Leaderboards, Achievement System
+
+#### 5.5 Enhanced Script Management
+- **Generated Scripts Library**: Lokale und Cloud-Speicherung
+- **Script Metadata**: Thema, Generierungszeit, Schwierigkeitsgrad, Rating
+- **Export/Share**: JSON, PDF, Link-Sharing für Sessions
+- **Version Control**: Script Iterationen und Verbesserungen
 
 ### Phase 6: Styling Guidelines
 
@@ -329,8 +363,11 @@ export const useTeleprompterAnimation = ({
 
 #### Custom Hooks Pattern:
 - `useTeleprompterState`: Zentrale State-Verwaltung
-- `useTeleprompterHandlers`: Event-Handler und Business Logic
+- `useTeleprompterHandlers`: Event-Handler und Business Logic  
 - `useTeleprompterAnimation`: Performance-optimierte Animation
+- `useGeminiAI`: AI Script Generation und API Management
+- `useFirebaseSession`: Real-time Session Management
+- `usePerformanceTracking`: Reading Analytics und Scoring
 - `useMobile`: Responsive Breakpoint Detection
 
 #### localStorage Integration:
@@ -339,7 +376,21 @@ export const useTeleprompterAnimation = ({
 const persistedSettings = {
   speed: 'teleprompter-speed',
   bookmarks: 'teleprompter-bookmarks',
-  speakerAliases: 'teleprompter-speaker-aliases'
+  speakerAliases: 'teleprompter-speaker-aliases',
+  generatedScripts: 'podcast-karaoke-scripts',
+  userPreferences: 'user-preferences',
+  sessionHistory: 'session-history'
+};
+```
+
+#### Firebase Services Integration:
+```typescript
+// Core Firebase Services
+export const firebaseServices = {
+  auth: 'user-authentication',
+  firestore: 'scripts-and-sessions',
+  functions: 'gemini-api-integration',
+  realtimeDB: 'live-session-sync'
 };
 ```
 
@@ -369,28 +420,51 @@ export default defineConfig(({ mode }) => ({
 
 ## JSON Skript-Format
 
-### Standard-Format:
+### Standard-Format (Manuell + AI-Generiert):
 ```json
-[
-  {
-    "type": "direction",
-    "text": "[Regieanweisung in eckigen Klammern]"
+{
+  "metadata": {
+    "title": "Künstliche Intelligenz im Alltag",
+    "duration": "12-15 minutes",
+    "difficulty": "medium",
+    "generatedBy": "gemini-pro",
+    "createdAt": "2024-01-10T10:30:00Z",
+    "topics": ["AI", "Technology", "Future"]
   },
-  {
-    "type": "speaker-a",
-    "text": "Text des ersten Sprechers"
-  },
-  {
-    "type": "speaker-b", 
-    "text": "Text des zweiten Sprechers"
-  }
-]
+  "script": [
+    {
+      "type": "direction",
+      "text": "[Beide Moderatoren begrüßen sich herzlich]",
+      "timestamp": 0
+    },
+    {
+      "type": "speaker-a",
+      "text": "Willkommen zu unserem Podcast über Künstliche Intelligenz! Ich bin...",
+      "timestamp": 5,
+      "difficulty": "easy"
+    },
+    {
+      "type": "speaker-b", 
+      "text": "...und ich bin... Heute sprechen wir über AI im Alltag.",
+      "timestamp": 15,
+      "difficulty": "medium"
+    }
+  ]
+}
 ```
 
-### Unterstützte Typen:
+### Erweiterte Skript-Typen:
 - `direction`: Regieanweisungen (grau, kursiv, kleiner)
-- `speaker-a`: Erster Sprecher (grün: #76ff03)
+- `speaker-a`: Erster Sprecher (grün: #76ff03)  
 - `speaker-b`: Zweiter Sprecher (blau: #40c4ff)
+- `both`: Beide Sprecher gleichzeitig (gelb: #ffd54f)
+- `pause`: Automatische Pausen für Timing (transparent)
+
+### AI-Generierte Metadaten:
+- **Topic Analysis**: Automatische Themen-Extraktion
+- **Difficulty Scoring**: Basierend auf Wort-Komplexität
+- **Timing Estimation**: WPM-basierte Zeitschätzung
+- **Style Classification**: Interview, Debate, Casual, Educational
 
 ## Performance Requirements
 

@@ -1,22 +1,24 @@
-# Smooth Script Streamer - Multi-Agent Development Framework
+# Podcast Karaoke - AI-Enhanced Multi-Agent Development Framework
 
 ## Agent-Team Struktur
 
 ### 🎯 Lead Architect Agent
 **Rolle**: Projektleitung und Architektur-Entscheidungen
 **Verantwortlichkeiten**:
-- Technische Architektur-Planung
+- Technische Architektur-Planung (Frontend + Backend)
 - Design System Definition
 - Performance-Anforderungen festlegen
 - Code Review und Quality Gates
 - Integration verschiedener Agent-Outputs
+- AI/Firebase Integration Oversight
 
-**Expertise**: React Patterns, TypeScript, Performance Engineering
+**Expertise**: React Patterns, TypeScript, Performance Engineering, Firebase Architecture
 **Deliverables**: 
 - Technische Spezifikation
-- Architektur-Diagramme
+- Architektur-Diagramme (inkl. Firebase/Gemini)
 - Performance-Benchmarks
 - Code-Standards Definition
+- AI Integration Guidelines
 
 ---
 
@@ -113,35 +115,102 @@ const animate = (timestamp: number) => {
 
 ---
 
-### 📡 Data & Integration Agent
-**Rolle**: JSON Loading und External Integrations
+### 🤖 AI Integration Agent
+**Rolle**: Gemini AI Integration und Script Generation
 **Verantwortlichkeiten**:
-- JSON Script Loading System
-- Error Handling und Fallbacks
-- localStorage Integration
-- Export/Import Funktionalität
-- API Integration (falls benötigt)
+- Gemini Pro API Integration
+- Prompt Engineering für Dialog-Generierung
+- AI Response Processing und Validation
+- Script Quality Optimization
+- Error Handling für AI Services
 
-**Expertise**: Fetch API, Error Handling, localStorage, File System APIs
+**Expertise**: Google Gemini API, Prompt Engineering, Natural Language Processing
 **Deliverables**:
-- Script Loading Logic
-- Data Persistence Layer
-- Import/Export Functions
-- Error Handling Framework
+- Gemini API Service Layer
+- Script Generation Prompts
+- AI Response Validators
+- Performance Monitoring für AI Calls
 
-**JSON Schema Validation**:
+**Kritische Implementation**:
 ```typescript
-interface ScriptItem {
-  type: 'direction' | 'speaker-a' | 'speaker-b';
-  text: string;
+const generatePodcastScript = async (topic: string, duration: number) => {
+  const prompt = `Erstelle ein ${duration}-minütiges Podcast-Script über "${topic}" 
+                  für 2 Sprecher mit natürlichen Dialogen, Regieanweisungen und 
+                  engaging Content für Podcast Karaoke.`;
+  
+  const result = await model.generateContent(prompt);
+  return validateAndFormatScript(result.response.text());
+};
+```
+
+---
+
+### 🔥 Firebase Backend Agent
+**Rolle**: Backend Services und Real-time Features
+**Verantwortlichkeiten**:
+- Firebase Project Setup und Configuration
+- Firestore Database Design
+- Authentication System Implementation
+- Cloud Functions für AI Integration
+- Real-time Database für Multi-User Sessions
+
+**Expertise**: Firebase Suite, NoSQL Design, Cloud Functions, Real-time Systems
+**Deliverables**:
+- Firebase Configuration
+- Database Schema Design
+- Authentication Flow
+- Cloud Functions für Gemini API
+- Real-time Session Management
+
+**Database Schema**:
+```typescript
+// Firestore Collections
+collections: {
+  users: { profile, preferences, history },
+  scripts: { metadata, content, ratings },
+  sessions: { participants, state, performance },
+  analytics: { reading_stats, session_data }
+}
+```
+
+---
+
+### 📡 Session Management Agent
+**Rolle**: Multi-User Session Orchestration
+**Verantwortlichkeiten**:
+- Real-time Session Creation und Management  
+- User Role Assignment (Speaker A/B)
+- Session State Synchronization
+- QR-Code/Link Generation für Session Join
+- Performance Tracking während Sessions
+
+**Expertise**: Real-time Systems, WebRTC, Session Management, Multi-User UX
+**Deliverables**:
+- Session Management System
+- Real-time Sync Logic
+- User Role Assignment
+- Session Analytics
+
+**Session Flow**:
+```typescript
+interface KaraokeSession {
+  id: string;
+  hostId: string;
+  scriptId: string;
+  participants: Participant[];
+  state: 'waiting' | 'active' | 'completed';
+  roles: { speakerA: string; speakerB: string };
+  performance: PerformanceMetrics;
 }
 
-const validateScript = (data: unknown): ScriptItem[] => {
-  if (!Array.isArray(data)) {
-    throw new Error('Skript-Format ist ungültig. Erwartet wird ein Array.');
-  }
-  // Weitere Validierung...
-}
+const createSession = async (scriptId: string) => {
+  const session = await sessionService.create({
+    scriptId,
+    joinCode: generateJoinCode(),
+    maxParticipants: 2
+  });
+  return session;
+};
 ```
 
 ---
@@ -212,23 +281,25 @@ jobs:
 ### Phase 1: Planning & Architecture (Lead Architect)
 **Dauer**: 1-2 Tage
 **Outputs**: 
-- Technical Specification
+- Technical Specification (inkl. AI/Firebase)
 - Component Architecture
 - Performance Requirements
 - Integration Points Definition
+- AI Integration Strategy
 
-### Phase 2: Design System (UI/UX Design Agent)
+### Phase 2: Design System + Firebase Setup (UI/UX + Firebase Agent)
 **Dauer**: 2-3 Tage
 **Outputs**:
 - Tailwind Configuration
-- CSS Variables System
+- CSS Variables System  
 - Component Design Tokens
-- Accessibility Guidelines
+- Firebase Project Setup
+- Authentication Configuration
 
-**Parallel zu Phase 2**: DevOps Setup (DevOps Agent)
-- Repository Structure
-- Build Pipeline
-- Development Environment
+**Parallel zu Phase 2**: AI Integration (AI Integration Agent)
+- Gemini API Setup
+- Prompt Engineering
+- Script Generation Testing
 
 ### Phase 3: Core Development (React Agent + Animation Agent)
 **Dauer**: 4-5 Tage
@@ -236,14 +307,30 @@ jobs:
 - Basic Component Structure
 - Animation System
 - State Management
-- Basic Functionality
+- Teleprompter Functionality
 
-**Parallel zu Phase 3**: Data Layer (Data Integration Agent)
-- JSON Loading System
-- localStorage Integration
-- Error Handling
+**Parallel zu Phase 3**: Backend Services (Firebase Agent)
+- Firestore Schema Implementation
+- Cloud Functions Development
+- Authentication Integration
 
-### Phase 4: Mobile & Accessibility (Mobile Agent)
+### Phase 4: AI Features Integration (AI Agent + React Agent)
+**Dauer**: 3-4 Tage
+**Outputs**:
+- Script Generation UI
+- Gemini API Integration
+- Generated Script Management
+- Quality Control System
+
+### Phase 5: Multi-User Features (Session Management Agent + React Agent)
+**Dauer**: 3-4 Tage
+**Outputs**:
+- Session Creation/Join Logic
+- Real-time Synchronization
+- Role Assignment System
+- Performance Tracking
+
+### Phase 6: Mobile & Accessibility (Mobile Agent)
 **Dauer**: 2-3 Tage
 **Outputs**:
 - Mobile Controls
@@ -251,18 +338,18 @@ jobs:
 - Accessibility Implementation
 - Cross-device Testing
 
-### Phase 5: Integration & Testing (Alle Agents)
+### Phase 7: Integration & Testing (Alle Agents)
+**Dauer**: 3-4 Tage
+**Outputs**:
+- Full System Integration
+- AI Performance Testing
+- Multi-User Session Testing
+- Performance Optimization
+
+### Phase 8: Deployment & Documentation (DevOps Agent + Lead Architect)
 **Dauer**: 2-3 Tage
 **Outputs**:
-- Full Integration
-- Cross-browser Testing
-- Performance Optimization
-- Bug Fixes
-
-### Phase 6: Deployment & Documentation (DevOps Agent + Lead Architect)
-**Dauer**: 1-2 Tage
-**Outputs**:
-- Production Deployment
+- Production Deployment (Firebase + GitHub Pages)
 - Documentation
 - Performance Monitoring
 - User Acceptance Testing
@@ -279,6 +366,8 @@ jobs:
 - [ ] Component Tests vorhanden
 - [ ] Performance Benchmarks erfüllt
 - [ ] Accessibility Standards eingehalten
+- [ ] Firebase Security Rules validiert
+- [ ] AI API Error Handling implementiert
 
 ### 🎨 Design Quality Gate
 **Verantwortlicher**: UI/UX Design Agent
@@ -293,10 +382,12 @@ jobs:
 **Verantwortlicher**: Animation & Performance Agent
 **Kriterien**:
 - [ ] 60fps Animation Performance
-- [ ] Bundle Size < 1MB
+- [ ] Bundle Size < 2MB (inkl. AI features)
 - [ ] First Contentful Paint < 2s
 - [ ] Time to Interactive < 3s
 - [ ] Memory Leaks Prevention
+- [ ] AI Response Time < 10s
+- [ ] Real-time Sync Latency < 500ms
 
 ### 📱 Mobile Quality Gate
 **Verantwortlicher**: Mobile & Accessibility Agent
@@ -311,10 +402,21 @@ jobs:
 **Verantwortlicher**: DevOps & Deployment Agent
 **Kriterien**:
 - [ ] CI/CD Pipeline funktional
-- [ ] GitHub Pages Deployment erfolgreich
+- [ ] Firebase Hosting erfolgreich
 - [ ] Environment Variables konfiguriert
 - [ ] Error Monitoring aktiv
 - [ ] Rollback-Strategie definiert
+- [ ] Firebase Security Rules deployed
+- [ ] AI API Monitoring aktiv
+
+### 🤖 AI Integration Quality Gate
+**Verantwortlicher**: AI Integration Agent
+**Kriterien**:
+- [ ] Gemini API Integration funktional
+- [ ] Script Generation Quality validated
+- [ ] Error Handling für AI Failures
+- [ ] Rate Limiting implementiert
+- [ ] Cost Monitoring aktiv
 
 ---
 
@@ -401,10 +503,10 @@ jobs:
 
 ## Project Timeline
 
-**Gesamt-Dauer**: 12-15 Tage
-**Team-Größe**: 6 spezialisierte Agents
+**Gesamt-Dauer**: 18-22 Tage
+**Team-Größe**: 8 spezialisierte Agents
 **Parallele Entwicklung**: Ja
-**Quality Gates**: 5 Major Checkpoints
-**Deployment**: Automatisch via GitHub Actions
+**Quality Gates**: 6 Major Checkpoints
+**Deployment**: Firebase Hosting + GitHub Actions
 
-**Erwartetes Ergebnis**: Eine professionelle, state-of-the-art Teleprompter Web-Anwendung mit optimaler Performance, Accessibility und User Experience für Live-Podcast-Produktionen.
+**Erwartetes Ergebnis**: Eine revolutionäre "Podcast Karaoke" Web-Anwendung mit KI-gestützter Script-Generierung, Multi-User Sessions, optimaler Performance und barrierefreiem Design für interaktive Podcast-Erlebnisse.

@@ -439,24 +439,39 @@ const Teleprompter: React.FC = () => {
     );
   }
 
-  // Calculate progress based on text passing the red focus line (50% viewport height)
+  // Calculate progress based on which script item is at the focus line
   const getProgress = () => {
-    if (!scriptRef.current) return 0;
+    if (!scriptRef.current || script.length === 0) return 0;
     
     const viewportHeight = window.innerHeight;
     const focusLinePosition = viewportHeight * 0.5; // Red line at 50% viewport height
+    const startPadding = viewportHeight; // Initial 100vh padding
     
-    // Use a consistent script height calculation
-    const scriptElement = scriptRef.current;
-    const scriptHeight = Math.max(scriptElement.scrollHeight, scriptElement.clientHeight);
+    // Calculate which script item is currently at the focus line
+    const focusPosition = currentPosition + focusLinePosition - startPadding;
     
-    // Total distance text needs to travel to completely pass the focus line
-    const totalScrollDistance = scriptHeight + viewportHeight - focusLinePosition;
+    // Find all script item elements
+    const scriptItems = scriptRef.current.children;
+    let currentItemIndex = 0;
+    let accumulatedHeight = 0;
     
-    if (totalScrollDistance <= 0) return 0;
+    for (let i = 0; i < scriptItems.length; i++) {
+      const itemHeight = (scriptItems[i] as HTMLElement).offsetHeight;
+      const itemBottom = accumulatedHeight + itemHeight;
+      
+      if (focusPosition <= itemBottom) {
+        // Calculate smooth progress within this item
+        const itemProgress = Math.max(0, (focusPosition - accumulatedHeight) / itemHeight);
+        currentItemIndex = i + itemProgress;
+        break;
+      }
+      
+      accumulatedHeight = itemBottom;
+      currentItemIndex = i + 1;
+    }
     
-    // Progress based on current scroll position
-    const progress = (currentPosition / totalScrollDistance) * 100;
+    // Convert to percentage
+    const progress = (currentItemIndex / script.length) * 100;
     return Math.min(100, Math.max(0, progress));
   };
 

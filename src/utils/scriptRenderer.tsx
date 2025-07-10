@@ -28,24 +28,6 @@ export const renderScript = (script: ScriptItem[], speakerAliases: TeleprompterS
             {content}
           </div>
         );
-      case 'speaker-andreas':
-        className += " text-teleprompter-text";
-        content = content.replace(/^[^:]*:\s*/, '');
-        return (
-          <div key={index} className={className}>
-            <span className="font-bold text-speaker-andreas">{speakerAliases['speaker-andreas']}: </span>
-            {content}
-          </div>
-        );
-      case 'speaker-achim':
-        className += " text-teleprompter-text";
-        content = content.replace(/^[^:]*:\s*/, '');
-        return (
-          <div key={index} className={className}>
-            <span className="font-bold text-speaker-achim">{speakerAliases['speaker-achim']}: </span>
-            {content}
-          </div>
-        );
       default:
         className += " text-teleprompter-text";
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Play, Pause, RotateCcw, Plus, Minus, FileText, Bookmark, Download, Upload } from 'lucide-react';
+import { Play, Pause, RotateCcw, Plus, Minus, FileText, Bookmark, Download, Upload, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -439,12 +439,27 @@ const Teleprompter: React.FC = () => {
     );
   }
 
+  // Calculate progress percentage
+  const getProgress = () => {
+    if (!scriptRef.current) return 0;
+    const maxScroll = scriptRef.current.clientHeight - window.innerHeight + 200;
+    return Math.min(100, Math.max(0, (currentPosition / maxScroll) * 100));
+  };
+
   return (
     <div 
       ref={containerRef}
       className="h-screen overflow-hidden bg-teleprompter-bg text-teleprompter-text relative select-none"
       style={{ userSelect: 'none' }}
     >
+      {/* Progress bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gray-800 z-20">
+        <div 
+          className="h-full bg-gradient-to-r from-speaker-andreas to-speaker-achim transition-all duration-300"
+          style={{ width: `${getProgress()}%` }}
+        />
+      </div>
+
       {/* Focus line */}
       <div 
         className="absolute left-0 right-0 h-0.5 z-10 pointer-events-none"
@@ -482,13 +497,21 @@ const Teleprompter: React.FC = () => {
       
       {/* Mobile controls */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-mobileControl-bg/95 text-mobileControl-text p-4 backdrop-blur-md border-t border-gray-600">
-        <div className="flex justify-center items-center gap-4">
+        <div className="flex justify-center items-center gap-3">
+          <Button
+            onClick={() => setIsStarted(false)}
+            className="w-10 h-10 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
+            aria-label="Zum Startmenü"
+          >
+            <Home className="w-4 h-4" />
+          </Button>
+          
           <Button
             onClick={() => handleSpeedChange(-0.05)}
-            className="w-12 h-12 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
+            className="w-10 h-10 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
             aria-label="Scrollgeschwindigkeit verringern"
           >
-            <Minus className="w-5 h-5" />
+            <Minus className="w-4 h-4" />
           </Button>
           
           <Button
@@ -501,18 +524,18 @@ const Teleprompter: React.FC = () => {
           
           <Button
             onClick={() => handleSpeedChange(0.05)}
-            className="w-12 h-12 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
+            className="w-10 h-10 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
             aria-label="Scrollgeschwindigkeit erhöhen"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-4 h-4" />
           </Button>
           
           <Button
             onClick={handleRewind}
-            className="w-12 h-12 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
+            className="w-10 h-10 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
             aria-label="Zurückspulen"
           >
-            <RotateCcw className="w-5 h-5" />
+            <RotateCcw className="w-4 h-4" />
           </Button>
         </div>
         

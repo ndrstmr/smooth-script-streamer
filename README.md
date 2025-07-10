@@ -2,6 +2,11 @@
 
 Eine moderne, responsive und barrierefreie Teleprompter Web-App, optimiert für Live-Podcasts und Präsentationen.
 
+## 🚀 Live Demo
+Die App ist live verfügbar unter: **[GitHub Pages](https://yourusername.github.io/repository-name)**
+
+> **Hinweis**: Ersetzen Sie `yourusername` und `repository-name` mit Ihren tatsächlichen GitHub-Daten.
+
 ## Features
 
 ### 🎯 Kernfunktionalitäten

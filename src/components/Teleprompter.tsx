@@ -40,7 +40,7 @@ const Teleprompter: React.FC = () => {
     loadScript
   });
 
-  // Load initial script
+  // Load initial script when URL changes
   useEffect(() => {
     loadScript(state.scriptUrl);
   }, [loadScript, state.scriptUrl]);

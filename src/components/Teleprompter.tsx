@@ -481,11 +481,11 @@ const Teleprompter: React.FC = () => {
       </div>
       
       {/* Mobile controls */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-mobileControl-bg text-mobileControl-text p-4 backdrop-blur-md border-t border-gray-300">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-mobileControl-bg/95 text-mobileControl-text p-4 backdrop-blur-md border-t border-gray-600">
         <div className="flex justify-center items-center gap-4">
           <Button
             onClick={() => handleSpeedChange(-0.05)}
-            className="w-12 h-12 rounded-full bg-mobileControl-bg text-mobileControl-text border border-gray-300 hover:bg-gray-100"
+            className="w-12 h-12 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
             aria-label="Scrollgeschwindigkeit verringern"
           >
             <Minus className="w-5 h-5" />
@@ -493,7 +493,7 @@ const Teleprompter: React.FC = () => {
           
           <Button
             onClick={handlePlayPause}
-            className="w-12 h-12 rounded-full bg-mobileControl-bg text-mobileControl-text border border-gray-300 hover:bg-gray-100"
+            className="w-12 h-12 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
             aria-label={isPlaying ? "Pause" : "Play"}
           >
             {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -501,7 +501,7 @@ const Teleprompter: React.FC = () => {
           
           <Button
             onClick={() => handleSpeedChange(0.05)}
-            className="w-12 h-12 rounded-full bg-mobileControl-bg text-mobileControl-text border border-gray-300 hover:bg-gray-100"
+            className="w-12 h-12 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
             aria-label="Scrollgeschwindigkeit erhöhen"
           >
             <Plus className="w-5 h-5" />
@@ -509,14 +509,14 @@ const Teleprompter: React.FC = () => {
           
           <Button
             onClick={handleRewind}
-            className="w-12 h-12 rounded-full bg-mobileControl-bg text-mobileControl-text border border-gray-300 hover:bg-gray-100"
+            className="w-12 h-12 rounded-full bg-gray-700 text-white border border-gray-600 hover:bg-gray-600 focus:bg-gray-600 focus:ring-2 focus:ring-gray-500 active:bg-gray-800"
             aria-label="Zurückspulen"
           >
             <RotateCcw className="w-5 h-5" />
           </Button>
         </div>
         
-        <div className="text-center text-sm mt-2 font-medium">
+        <div className="text-center text-sm mt-2 font-medium text-gray-300">
           Geschwindigkeit: {speed.toFixed(2)}
         </div>
       </div>

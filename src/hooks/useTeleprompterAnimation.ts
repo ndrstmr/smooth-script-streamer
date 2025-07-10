@@ -29,6 +29,8 @@ export const useTeleprompterAnimation = ({
       return;
     }
 
+    let lastPosition = currentPosition;
+
     const animate = (timestamp: number) => {
       if (!scriptRef.current) return;
 
@@ -42,7 +44,8 @@ export const useTeleprompterAnimation = ({
       lastTimeRef.current = timestamp;
 
       // Update position based on speed and time
-      const newPosition = currentPosition + (speed * deltaTime * 0.06); // 0.06 for speed calibration
+      const newPosition = lastPosition + (speed * deltaTime * 0.06); // 0.06 for speed calibration
+      lastPosition = newPosition;
       
       if (newPosition >= maxScroll) {
         onPositionUpdate(maxScroll);
@@ -62,7 +65,7 @@ export const useTeleprompterAnimation = ({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isPlaying, speed]); // Removed currentPosition from dependencies to break cycle
+  }, [isPlaying, speed, currentPosition]); // Re-added currentPosition but using local variable to prevent loops
 
   // Update max scroll distance when script changes
   useEffect(() => {

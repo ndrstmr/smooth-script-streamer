@@ -52,7 +52,7 @@ export const useTeleprompterState = () => {
   });
 
   const { toast } = useToast();
-  const availableScripts = ['script.json'];
+  const availableScripts = ['script.json', 'episode1.json'];
 
   // Load settings from localStorage
   useEffect(() => {

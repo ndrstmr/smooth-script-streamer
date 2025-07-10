@@ -44,8 +44,8 @@ export const useTeleprompterState = () => {
     error: '',
     maxScrollDistance: 0,
     speakerAliases: {
-      'speaker-a': 'Sprecher A',
-      'speaker-b': 'Sprecher B',
+      'speaker-a': 'Andreas',
+      'speaker-b': 'Achim', 
       'speaker-andreas': 'Andreas',
       'speaker-achim': 'Achim'
     }

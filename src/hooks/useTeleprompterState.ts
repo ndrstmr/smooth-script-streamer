@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 export interface ScriptItem {
-  type: 'direction' | 'speaker-andreas' | 'speaker-achim';
+  type: 'direction' | 'speaker-a' | 'speaker-b';
   text: string;
 }
 
@@ -40,7 +40,7 @@ export const useTeleprompterState = () => {
   });
 
   const { toast } = useToast();
-  const availableScripts = ['script.json', 'episode-2.json', 'episode-3.json'];
+  const availableScripts = ['script.json'];
 
   // Load settings from localStorage
   useEffect(() => {

@@ -10,21 +10,21 @@ export const renderScript = (script: ScriptItem[]) => {
       case 'direction':
         className += " text-teleprompter-direction italic text-[0.8em]";
         break;
-      case 'speaker-andreas':
+      case 'speaker-a':
         className += " text-teleprompter-text";
         content = content.replace(/^[^:]*:\s*/, '');
         return (
           <div key={index} className={className}>
-            <span className="font-bold text-speaker-andreas">Andreas: </span>
+            <span className="font-bold text-speaker-andreas">Sprecher A: </span>
             {content}
           </div>
         );
-      case 'speaker-achim':
+      case 'speaker-b':
         className += " text-teleprompter-text";
         content = content.replace(/^[^:]*:\s*/, '');
         return (
           <div key={index} className={className}>
-            <span className="font-bold text-speaker-achim">Achim: </span>
+            <span className="font-bold text-speaker-achim">Sprecher B: </span>
             {content}
           </div>
         );

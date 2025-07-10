@@ -44,7 +44,7 @@ export const useTeleprompterAnimation = ({
       lastTimeRef.current = timestamp;
 
       // Update position based on speed and time
-      const newPosition = lastPosition + (speed * deltaTime * 0.06); // 0.06 for speed calibration
+      const newPosition = lastPosition + (speed * deltaTime * 0.2); // 0.2 for speed calibration
       lastPosition = newPosition;
       
       if (newPosition >= maxScroll) {

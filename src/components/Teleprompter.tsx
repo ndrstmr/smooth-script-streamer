@@ -439,39 +439,17 @@ const Teleprompter: React.FC = () => {
     );
   }
 
-  // Calculate progress based on which script item is at the focus line
+  // Simple progress calculation based on current position vs total script height
   const getProgress = () => {
     if (!scriptRef.current || script.length === 0) return 0;
     
+    const scriptHeight = scriptRef.current.scrollHeight;
     const viewportHeight = window.innerHeight;
-    const focusLinePosition = viewportHeight * 0.5; // Red line at 50% viewport height
-    const startPadding = viewportHeight; // Initial 100vh padding
+    const maxScrollDistance = scriptHeight - viewportHeight + 200; // Same as in animation
     
-    // Calculate which script item is currently at the focus line
-    const focusPosition = currentPosition + focusLinePosition - startPadding;
+    if (maxScrollDistance <= 0) return 0;
     
-    // Find all script item elements
-    const scriptItems = scriptRef.current.children;
-    let currentItemIndex = 0;
-    let accumulatedHeight = 0;
-    
-    for (let i = 0; i < scriptItems.length; i++) {
-      const itemHeight = (scriptItems[i] as HTMLElement).offsetHeight;
-      const itemBottom = accumulatedHeight + itemHeight;
-      
-      if (focusPosition <= itemBottom) {
-        // Calculate smooth progress within this item
-        const itemProgress = Math.max(0, (focusPosition - accumulatedHeight) / itemHeight);
-        currentItemIndex = i + itemProgress;
-        break;
-      }
-      
-      accumulatedHeight = itemBottom;
-      currentItemIndex = i + 1;
-    }
-    
-    // Convert to percentage
-    const progress = (currentItemIndex / script.length) * 100;
+    const progress = (currentPosition / maxScrollDistance) * 100;
     return Math.min(100, Math.max(0, progress));
   };
 

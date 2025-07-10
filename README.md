@@ -1,178 +1,192 @@
-# Teleprompter - State-of-the-Art Web-App
+# Podcast Karaoke - AI-Enhanced Teleprompter
 
-Eine moderne, responsive und barrierefreie Teleprompter Web-App, optimiert für Live-Podcasts und Präsentationen.
+Eine revolutionäre Web-Anwendung für interaktives "Podcast Karaoke" mit KI-gestützter Script-Generierung, Multi-User Sessions und professionellem Teleprompter-Scrolling.
 
-## 🚀 Live Demo
-Die App ist live verfügbar unter: **[GitHub Pages](https://ndrstmr.github.io/smooth-script-streamer/)**
+## 🎯 Projektübersicht
 
-> **Hinweis**: Ersetzen Sie `yourusername` und `repository-name` mit Ihren tatsächlichen GitHub-Daten.
+Podcast Karaoke kombiniert flüssiges Teleprompter-Scrolling mit Gemini AI für automatische Dialog-Erstellung und Multi-User Sessions für kollaborative Podcast-Performances. Nutzer können Themen eingeben, automatisch 10-15 minütige Scripts generieren lassen und diese gemeinsam in Echtzeit vortragen.
 
-## Features
+## ✨ Features
 
-### 🎯 Kernfunktionalitäten
-- **Flüssiges Scrollen**: Sanfte Animation von unten nach oben mit `requestAnimationFrame`
-- **JSON-Skript-Integration**: Dynamisches Laden von Skripten aus externen JSON-Dateien
-- **Responsive Design**: Optimiert für Desktop (320px - 1920px) und Mobile
-- **Dark Mode**: Studio-optimiertes Design (#121212 Hintergrund, #e0e0e0 Text)
-- **Fokuslinie**: Halbtransparente rote Linie zur Markierung des aktuellen Lesepunkts
+### 🤖 AI Script Generation
+- **Automatische Dialog-Erstellung** mit Google Gemini Pro
+- **Themeneingabe** via benutzerfreundlichem Wizard
+- **Script-Anpassung**: Länge (10-15 Min), Stil, Schwierigkeitsgrad
+- **Qualitätskontrolle** und Validierung
 
-### 🎮 Steuerung
-**Desktop:**
-- `Leertaste`: Play/Pause
-- `+/-`: Geschwindigkeit anpassen (0.05 - 1.0)
-- `R`: Zurückspulen zum Anfang
-- `B`: Lesezeichen setzen
+### 👥 Multi-User Karaoke Sessions
+- **Session-Erstellung** mit QR-Code/Link für Teilnehmer
+- **Automatische Rollenzuteilung** (Speaker A/B)
+- **Real-time Synchronisation** über Firebase
+- **Performance-Tracking** und Vergleiche
 
-**Mobile:**
-- Touch-optimierte Steuerleiste am unteren Bildschirmrand
-- Runde Buttons für alle Funktionen
-- Backdrop-Filter für modernen Look
+### 🎬 Professionelles Teleprompter
+- **60fps flüssiges Scrolling** mit requestAnimationFrame
+- **Responsive Design** für alle Geräte (320px - 1920px)
+- **Studio-optimiertes Dark Theme**
+- **Hardware-beschleunigtes Rendering**
 
-### 🚀 Erweiterte Features
-- **Skript-Auswahl**: Dropdown-Menü für verschiedene JSON-Dateien
-- **Lesezeichen**: Setzen und Navigieren zu bestimmten Positionen
-- **Export/Import**: Skripte als JSON herunterladen/hochladen
-- **Vorschau-Modus**: Statische Anzeige zur Vorbereitung
-- **Einstellungen-Speicherung**: Geschwindigkeit in localStorage
-- **Fehlerbehandlung**: Benutzerfreundliche Fehlermeldungen
+### 📱 Mobile-First Design
+- **Touch-optimierte Controls**
+- **Cross-device Kompatibilität**
+- **Progressive Web App Features**
+- **Offline-Funktionalität** (geplant)
 
-### ♿ Barrierefreiheit
-- ARIA-Attribute für alle interaktiven Elemente
-- Vollständige Tastatursteuerung
-- Screenreader-optimierte Labels
-- Fokus-Indikatoren für bessere Navigation
+## 🛠 Technologie-Stack
 
-## JSON-Format
+- **Frontend**: React 18 + TypeScript + Vite
+- **Styling**: Tailwind CSS + Shadcn/ui Components
+- **Backend**: Firebase (Firestore, Auth, Functions)
+- **AI**: Google Gemini Pro API
+- **Real-time**: Firebase Realtime Database
+- **Deployment**: GitHub Pages + Firebase Hosting
 
-```json
-[
-  {
-    "type": "direction",
-    "text": "[Regieanweisung in eckigen Klammern]"
-  },
-  {
-    "type": "speaker-andreas",
-    "text": "Text des Sprechers Andreas"
-  },
-  {
-    "type": "speaker-achim", 
-    "text": "Text des Sprechers Achim"
-  }
-]
+## 📁 Projekt-Struktur
+
+```
+/
+├── docs/                     # Dokumentation
+│   ├── TECHNICAL_SPEC.md     # Technische Spezifikation
+│   ├── IMPLEMENTATION_GUIDE.md # Implementierungs-Leitfaden
+│   ├── DEPLOYMENT_GUIDE.md   # Deployment-Anleitung
+│   ├── TEAM_STRUCTURE.md     # Agent-Team Struktur
+│   ├── DEVELOPMENT_WORKFLOW.md # Entwicklungs-Workflow
+│   └── QUALITY_GATES.md      # Qualitätssicherung
+├── src/
+│   ├── components/           # React Components
+│   │   ├── teleprompter/     # Teleprompter Core
+│   │   ├── generator/        # AI Script Generation
+│   │   ├── session/          # Multi-User Features
+│   │   ├── analytics/        # Performance Tracking
+│   │   └── ui/               # Shadcn Components
+│   ├── hooks/                # Custom React Hooks
+│   ├── services/             # API Services
+│   └── types/                # TypeScript Interfaces
+└── public/                   # Static Assets
 ```
 
-### Unterstützte Sprecher-Typen:
-- `direction`: Regieanweisungen (grau, kursiv, kleiner)
-- `speaker-andreas`: Sprecher Andreas (grün: #76ff03)
-- `speaker-achim`: Sprecher Achim (blau: #40c4ff)
+## 🚀 Quick Start
 
-## Installation & Start
-
-### Voraussetzungen
-- Node.js (Version 16 oder höher)
-- npm oder yarn
-
-### Lokale Entwicklung
+### Entwicklung
 ```bash
 # Repository klonen
 git clone <repository-url>
-cd teleprompter
+cd podcast-karaoke
 
 # Dependencies installieren
 npm install
 
-# Entwicklungsserver starten
+# Development Server starten
 npm run dev
 ```
 
-Die App ist dann unter `http://localhost:8080` erreichbar.
-
-### Produktion
+### Deployment
 ```bash
-# Build erstellen
+# Produktions-Build
 npm run build
 
-# Mit Python-Server testen
-cd dist
-python -m http.server 8000
+# Firebase Deploy
+firebase deploy
+
+# GitHub Pages Deploy
+npm run deploy
 ```
 
-## Verwendung
+## 📖 Dokumentation
 
-1. **Skript auswählen**: Wählen Sie aus den verfügbaren Skripten oder geben Sie eine eigene URL ein
-2. **Import/Export**: Laden Sie eigene JSON-Dateien hoch oder exportieren Sie bestehende Skripte
-3. **Vorschau**: Nutzen Sie den Vorschau-Modus zur Vorbereitung
-4. **Teleprompter starten**: Klicken Sie auf den grünen Start-Button
-5. **Steuerung**: Nutzen Sie Tastatur (Desktop) oder Touch-Controls (Mobile)
-6. **Lesezeichen**: Setzen Sie Markierungen mit 'B' für wichtige Stellen
+### Für Entwickler
+- **[Technische Spezifikation](docs/TECHNICAL_SPEC.md)** - Core Stack, Architektur, Dependencies
+- **[Implementierungs-Guide](docs/IMPLEMENTATION_GUIDE.md)** - Komponenten, Features, Hooks
+- **[Deployment-Guide](docs/DEPLOYMENT_GUIDE.md)** - CI/CD, Firebase, GitHub Actions
 
-## Technische Details
+### Für Projektmanagement
+- **[Team-Struktur](docs/TEAM_STRUCTURE.md)** - Agent-Rollen und Verantwortlichkeiten
+- **[Development Workflow](docs/DEVELOPMENT_WORKFLOW.md)** - Phasen, Timeline, Kommunikation
+- **[Quality Gates](docs/QUALITY_GATES.md)** - Qualitätssicherung und Testing
 
-### Architektur
-- **React 18** mit TypeScript
-- **Tailwind CSS** für Styling
-- **Radix UI** für accessible Components
-- **Lucide React** für Icons
-- **React Router** für Navigation
+## 🔧 Entwicklungs-Workflow
 
-### Performance-Optimierungen
-- `will-change: transform` für flüssige Animationen
-- `requestAnimationFrame` für optimales Scrolling
-- Geschwindigkeitsbegrenzung (0.05-1.0) für ältere Geräte
-- Lazy Loading für große Skripte
+Das Projekt folgt einem **Multi-Agent Development Framework** mit spezialisierten Rollen:
 
-### Browser-Kompatibilität
-- Moderne Browser (Chrome 90+, Firefox 88+, Safari 14+)
-- Fallbacks für fehlende Features
-- Mobile Browser (iOS Safari, Chrome Mobile)
+1. **🎯 Lead Architect**: Gesamtarchitektur und Koordination
+2. **🎨 UI/UX Design**: Design System und User Experience
+3. **⚛️ React Development**: Component-Entwicklung
+4. **🤖 AI Integration**: Gemini API und Script-Generierung
+5. **🔥 Firebase Backend**: Backend Services und Real-time Features
+6. **📱 Mobile & Accessibility**: Cross-device Optimierung
+7. **🚀 DevOps**: CI/CD und Deployment
 
-## Beispiel-Skripte
+## 🎨 Design System
 
-Die App wird mit drei Beispiel-Episoden geliefert:
-- `script.json`: Erste Folge "Entwickler-Behörde"
-- `episode-2.json`: APIs in der Verwaltung
-- `episode-3.json`: Testing-Strategien
-
-## Anpassungen
-
-### Neue Sprecher hinzufügen
-1. Farbe in `src/index.css` definieren:
+### Color Palette
 ```css
---speaker-newname: [HSL-Wert];
+/* Studio-optimiertes Dark Theme */
+--background: 210 11% 7%;           /* #121212 */
+--foreground: 210 11% 88%;          /* #e0e0e0 */
+--speaker-andreas: 102 100% 52%;    /* #76ff03 */
+--speaker-achim: 203 100% 62%;      /* #40c4ff */
+--teleprompter-focus: 0 100% 50%;   /* #ff0000 */
 ```
 
-2. Farbe in `tailwind.config.ts` einbinden:
-```typescript
-speaker: {
-  newname: 'hsl(var(--speaker-newname))',
-}
-```
+### Performance Targets
+- **Animation**: 60fps flüssiges Scrolling
+- **Loading**: < 2s initial load
+- **Bundle**: < 2MB total size
+- **Accessibility**: WCAG 2.1 AA Compliance
 
-3. Typ in Teleprompter-Komponente erweitern
+## 🤝 Contributing
 
-### Styling anpassen
-Alle Farben und Designs sind im Design-System definiert:
-- `src/index.css`: CSS-Variablen
-- `tailwind.config.ts`: Tailwind-Konfiguration
+1. **Feature Branch erstellen**: `git checkout -b feature/your-feature`
+2. **Code Review**: Pull Request mit Lead Architect Review
+3. **Quality Gates**: Automated testing und manual validation
+4. **Integration**: Merge nach erfolgreicher Review
 
-## Troubleshooting
+## 📊 Success Metrics
 
-### Häufige Probleme
-- **Skript lädt nicht**: Prüfen Sie die JSON-Syntax und Dateipfade
-- **Animation ruckelt**: Reduzieren Sie die Scrollgeschwindigkeit
-- **Mobile Steuerung reagiert nicht**: Überprüfen Sie Touch-Events im Browser
+### Technical KPIs
+- **Performance**: Lighthouse Score > 95
+- **Accessibility**: WCAG 2.1 AA Compliance
+- **AI Quality**: 90%+ script generation success
+- **Mobile Performance**: 60fps auf mid-range devices
 
-### Debug-Modus
-Öffnen Sie die Browser-Entwicklertools für detaillierte Logs und Fehlermeldungen.
+### User Experience KPIs  
+- **Session Completion**: >80% erfolgreiche Karaoke Sessions
+- **Script Quality**: >4/5 user rating
+- **Mobile Usability**: Touch targets > 44px
+- **Loading Experience**: < 2s to interactive
 
-## Lizenz
+## 🚀 Roadmap
 
-Dieses Projekt ist unter der MIT-Lizenz verfügbar.
+### Phase 1: Core Teleprompter (✅ Completed)
+- Basis Teleprompter-Funktionalität
+- Responsive Design
+- Performance-Optimierung
 
-## Support
+### Phase 2: AI Integration (🚧 In Progress)
+- Gemini API Integration
+- Script Generation UI
+- Quality Control System
 
-Bei Fragen oder Problemen erstellen Sie bitte ein Issue im Repository oder kontaktieren Sie das Entwicklerteam.
+### Phase 3: Multi-User Features (📋 Planned)
+- Session Management
+- Real-time Synchronisation
+- Performance Analytics
+
+### Phase 4: Advanced Features (🔮 Future)
+- Voice Recognition Integration
+- Advanced AI Prompting
+- Social Features & Sharing
+
+## 📄 Lizenz
+
+[MIT License](LICENSE) - Siehe LICENSE Datei für Details.
+
+## 🙋‍♂️ Support
+
+- **GitHub Issues**: Bug Reports und Feature Requests
+- **Documentation**: Vollständige Docs im `/docs` Ordner  
+- **Development**: Follow development workflow in docs/
 
 ---
 
-**Entwickelt für professionelle Podcast-Produktionen und Live-Präsentationen.**
+**Entwickelt mit ❤️ für die Podcast-Community**

@@ -1,6 +1,6 @@
-# Podcast Karaoke - AI-Enhanced Multi-Agent Development Framework
+# Team Structure - Podcast Karaoke Development
 
-## Agent-Team Struktur
+## Agent Roles & Responsibilities
 
 ### 🎯 Lead Architect Agent
 **Rolle**: Projektleitung und Architektur-Entscheidungen
@@ -30,6 +30,7 @@
 - Accessibility Standards sicherstellen
 - Shadcn/ui Component Customization
 - Color Scheme und Typography
+- Podcast Karaoke UI/UX Design
 
 **Expertise**: Tailwind CSS, Responsive Design, WCAG 2.1, Color Theory
 **Deliverables**:
@@ -37,6 +38,7 @@
 - `tailwind.config.ts` Configuration
 - UI Component Library
 - Accessibility Audit Report
+- Karaoke Interface Design
 
 **Design Requirements**:
 ```css
@@ -60,6 +62,7 @@
 - TypeScript Interface Design
 - State Management Pattern
 - Event Handling und Business Logic
+- Integration von AI/Firebase Features
 
 **Expertise**: React 18, TypeScript, Custom Hooks, Performance Optimization
 **Deliverables**:
@@ -67,19 +70,7 @@
 - Custom Hooks (`src/hooks/`)
 - TypeScript Interfaces
 - State Management Logic
-
-**Component Struktur**:
-```
-src/components/
-├── Teleprompter.tsx                 # Main Container
-├── teleprompter/
-│   ├── TeleprompterStartScreen.tsx  # Script selection & settings
-│   ├── TeleprompterPreview.tsx      # Static preview mode
-│   ├── TeleprompterPlayer.tsx       # Main scrolling interface
-│   ├── TeleprompterControls.tsx     # Desktop/Mobile controls
-│   └── TeleprompterProgressBar.tsx  # Progress indicator
-└── ui/                              # Shadcn components
-```
+- AI Integration Components
 
 ---
 
@@ -91,6 +82,7 @@ src/components/
 - Memory Leak Prevention
 - Mobile Performance Optimization
 - Hardware-Beschleunigung
+- Real-time Performance für Multi-User
 
 **Expertise**: Animation APIs, Performance Profiling, Browser Optimization
 **Deliverables**:
@@ -223,6 +215,7 @@ const createSession = async (scriptId: string) => {
 - ARIA Labels und Semantic HTML
 - Keyboard Navigation
 - Screen Reader Compatibility
+- Multi-User Mobile Experience
 
 **Expertise**: Mobile Web, Touch Events, WCAG 2.1, Accessibility Testing
 **Deliverables**:
@@ -247,20 +240,22 @@ const createSession = async (scriptId: string) => {
 **Verantwortlichkeiten**:
 - GitHub Actions Workflow
 - Vite Build Configuration
-- GitHub Pages Deployment
+- Firebase Hosting + GitHub Pages Deployment
 - Environment Configuration
 - Performance Monitoring Setup
+- AI API Integration Monitoring
 
-**Expertise**: GitHub Actions, Vite, Static Site Deployment, CI/CD
+**Expertise**: GitHub Actions, Vite, Firebase Hosting, CI/CD
 **Deliverables**:
-- `.github/workflows/ci.yml`
+- `.github/workflows/deploy.yml`
 - `vite.config.ts` Configuration
+- Firebase Configuration
 - Deployment Documentation
 - Performance Monitoring Setup
 
 **CI/CD Pipeline**:
 ```yaml
-name: Deploy to GitHub Pages
+name: Deploy to Firebase & GitHub Pages
 on:
   push:
     branches: [ main ]
@@ -271,242 +266,20 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
       - uses: actions/upload-pages-artifact@v3
 ```
 
----
+## Agent Coordination
 
-## Development Workflow
+### Communication Protocols
+- **Daily Standups**: GitHub Issues/Project Board
+- **Integration Points**: Nach jeder Entwicklungsphase
+- **Code Reviews**: Pull Request basiert
+- **Quality Gates**: Vor jeder Phase-Transition
 
-### Phase 1: Planning & Architecture (Lead Architect)
-**Dauer**: 1-2 Tage
-**Outputs**: 
-- Technical Specification (inkl. AI/Firebase)
-- Component Architecture
-- Performance Requirements
-- Integration Points Definition
-- AI Integration Strategy
-
-### Phase 2: Design System + Firebase Setup (UI/UX + Firebase Agent)
-**Dauer**: 2-3 Tage
-**Outputs**:
-- Tailwind Configuration
-- CSS Variables System  
-- Component Design Tokens
-- Firebase Project Setup
-- Authentication Configuration
-
-**Parallel zu Phase 2**: AI Integration (AI Integration Agent)
-- Gemini API Setup
-- Prompt Engineering
-- Script Generation Testing
-
-### Phase 3: Core Development (React Agent + Animation Agent)
-**Dauer**: 4-5 Tage
-**Outputs**:
-- Basic Component Structure
-- Animation System
-- State Management
-- Teleprompter Functionality
-
-**Parallel zu Phase 3**: Backend Services (Firebase Agent)
-- Firestore Schema Implementation
-- Cloud Functions Development
-- Authentication Integration
-
-### Phase 4: AI Features Integration (AI Agent + React Agent)
-**Dauer**: 3-4 Tage
-**Outputs**:
-- Script Generation UI
-- Gemini API Integration
-- Generated Script Management
-- Quality Control System
-
-### Phase 5: Multi-User Features (Session Management Agent + React Agent)
-**Dauer**: 3-4 Tage
-**Outputs**:
-- Session Creation/Join Logic
-- Real-time Synchronization
-- Role Assignment System
-- Performance Tracking
-
-### Phase 6: Mobile & Accessibility (Mobile Agent)
-**Dauer**: 2-3 Tage
-**Outputs**:
-- Mobile Controls
-- Touch Interactions
-- Accessibility Implementation
-- Cross-device Testing
-
-### Phase 7: Integration & Testing (Alle Agents)
-**Dauer**: 3-4 Tage
-**Outputs**:
-- Full System Integration
-- AI Performance Testing
-- Multi-User Session Testing
-- Performance Optimization
-
-### Phase 8: Deployment & Documentation (DevOps Agent + Lead Architect)
-**Dauer**: 2-3 Tage
-**Outputs**:
-- Production Deployment (Firebase + GitHub Pages)
-- Documentation
-- Performance Monitoring
-- User Acceptance Testing
-
----
-
-## Quality Gates
-
-### 🔍 Code Quality Gate
-**Verantwortlicher**: Lead Architect Agent
-**Kriterien**:
-- [ ] TypeScript Strict Mode ohne Fehler
-- [ ] ESLint Rules bestanden
-- [ ] Component Tests vorhanden
-- [ ] Performance Benchmarks erfüllt
-- [ ] Accessibility Standards eingehalten
-- [ ] Firebase Security Rules validiert
-- [ ] AI API Error Handling implementiert
-
-### 🎨 Design Quality Gate
-**Verantwortlicher**: UI/UX Design Agent
-**Kriterien**:
-- [ ] Responsive Design 320px - 1920px
-- [ ] WCAG 2.1 AA Compliance
-- [ ] Contrast Ratio > 4.5:1
-- [ ] Design System Consistency
-- [ ] Cross-browser Visual Consistency
-
-### ⚡ Performance Quality Gate
-**Verantwortlicher**: Animation & Performance Agent
-**Kriterien**:
-- [ ] 60fps Animation Performance
-- [ ] Bundle Size < 2MB (inkl. AI features)
-- [ ] First Contentful Paint < 2s
-- [ ] Time to Interactive < 3s
-- [ ] Memory Leaks Prevention
-- [ ] AI Response Time < 10s
-- [ ] Real-time Sync Latency < 500ms
-
-### 📱 Mobile Quality Gate
-**Verantwortlicher**: Mobile & Accessibility Agent
-**Kriterien**:
-- [ ] Touch Controls funktional
-- [ ] iOS Safari Compatibility
-- [ ] Android Chrome Compatibility
-- [ ] Keyboard Navigation vollständig
-- [ ] Screen Reader kompatibel
-
-### 🚀 Deployment Quality Gate
-**Verantwortlicher**: DevOps & Deployment Agent
-**Kriterien**:
-- [ ] CI/CD Pipeline funktional
-- [ ] Firebase Hosting erfolgreich
-- [ ] Environment Variables konfiguriert
-- [ ] Error Monitoring aktiv
-- [ ] Rollback-Strategie definiert
-- [ ] Firebase Security Rules deployed
-- [ ] AI API Monitoring aktiv
-
-### 🤖 AI Integration Quality Gate
-**Verantwortlicher**: AI Integration Agent
-**Kriterien**:
-- [ ] Gemini API Integration funktional
-- [ ] Script Generation Quality validated
-- [ ] Error Handling für AI Failures
-- [ ] Rate Limiting implementiert
-- [ ] Cost Monitoring aktiv
-
----
-
-## Agent Communication Protokoll
-
-### Daily Standups (Async)
-**Format**: GitHub Issues/Project Board
-**Inhalt**:
-- Fortschritt des Vortages
-- Geplante Arbeiten für heute
-- Blockers und Dependencies
-- Code Review Requests
-
-### Integration Points
-**Wann**: Nach jeder Phase
-**Beteiligte**: Alle Agents
-**Ziel**: Konsistenz und Kompatibilität sicherstellen
-
-### Code Reviews
-**Trigger**: Pull Request
-**Reviewer**: Lead Architect + spezialisierter Agent
-**Kriterien**: Quality Gates Checkliste
-
----
-
-## Troubleshooting Framework
-
-### 🐛 Bug Tracking
-**Lead**: Lead Architect Agent
-**Process**:
-1. Bug Report mit Reproduktionsschritten
-2. Impact Assessment (Critical/High/Medium/Low)
-3. Agent Assignment basierend auf Expertise
-4. Fix Implementation
-5. Cross-agent Testing
-
-### 🔧 Performance Issues
-**Lead**: Animation & Performance Agent
-**Tools**:
-- Chrome DevTools Performance Tab
-- Lighthouse Audits
-- Bundle Analyzer
-- Memory Profiling
-
-### 📱 Mobile Issues
-**Lead**: Mobile & Accessibility Agent
-**Testing Matrix**:
-- iOS Safari (latest, -1)
-- Android Chrome (latest, -1)
-- Touch Event Debugging
-- Viewport Size Testing
-
-### 🎨 Design Issues
-**Lead**: UI/UX Design Agent
-**Process**:
-- Visual Regression Testing
-- Cross-browser Screenshots
-- Accessibility Validator
-- Design Token Verification
-
----
-
-## Success Metrics
-
-### Technical KPIs
-- **Performance**: Lighthouse Score > 95
-- **Accessibility**: WCAG 2.1 AA Compliance
-- **Browser Support**: 99%+ modern browsers
-- **Mobile Performance**: 60fps auf mid-range devices
-
-### User Experience KPIs
-- **Loading Time**: < 2s initial load
-- **Animation Smoothness**: 60fps consistent
-- **Mobile Usability**: Touch targets > 44px
-- **Keyboard Navigation**: 100% accessible
-
-### Development KPIs
-- **Code Coverage**: > 80%
-- **Build Time**: < 30s
-- **Deployment Time**: < 5min
-- **Bug Resolution**: < 24h for critical issues
-
----
-
-## Project Timeline
-
-**Gesamt-Dauer**: 18-22 Tage
-**Team-Größe**: 8 spezialisierte Agents
-**Parallele Entwicklung**: Ja
-**Quality Gates**: 6 Major Checkpoints
-**Deployment**: Firebase Hosting + GitHub Actions
-
-**Erwartetes Ergebnis**: Eine revolutionäre "Podcast Karaoke" Web-Anwendung mit KI-gestützter Script-Generierung, Multi-User Sessions, optimaler Performance und barrierefreiem Design für interaktive Podcast-Erlebnisse.
+### Dependency Management
+- **AI ↔ Firebase**: Gemini API über Cloud Functions
+- **Session ↔ Real-time**: Firebase Realtime Database
+- **UI ↔ Performance**: Animation optimization
+- **Mobile ↔ Accessibility**: Cross-device compatibility

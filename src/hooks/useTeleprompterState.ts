@@ -86,12 +86,16 @@ export const useTeleprompterState = () => {
 
   const loadScript = useCallback(async (url: string) => {
     try {
+      console.log('Loading script from:', url);
       setState(prev => ({ ...prev, error: '' }));
       const response = await fetch(url);
+      console.log('Response status:', response.status);
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
-      const data = await response.json();
+      const text = await response.text();
+      console.log('Response text:', text.substring(0, 100));
+      const data = JSON.parse(text);
       
       if (!Array.isArray(data)) {
         throw new Error('Skript-Format ist ungültig. Erwartet wird ein Array.');

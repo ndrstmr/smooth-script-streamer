@@ -3,6 +3,8 @@ import { Play, Pause, RotateCcw, Plus, Minus, FileText, Bookmark, Download, Uplo
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 
 interface ScriptItem {
@@ -268,30 +270,24 @@ const Teleprompter: React.FC = () => {
           break;
         case 'speaker-andreas':
           className += " text-teleprompter-text";
-          const andreasName = content.match(/^[^:]+:/);
-          if (andreasName) {
-            content = content.replace(/^[^:]+:/, '');
-            return (
-              <div key={index} className={className}>
-                <span className="font-bold text-speaker-andreas">Andreas:</span>
-                {content}
-              </div>
-            );
-          }
-          break;
+          // Entferne den Namen falls vorhanden (z.B. "Andreas: Text" -> " Text")
+          content = content.replace(/^[^:]*:\s*/, '');
+          return (
+            <div key={index} className={className}>
+              <span className="font-bold text-speaker-andreas">Andreas:</span>
+              {content}
+            </div>
+          );
         case 'speaker-achim':
           className += " text-teleprompter-text";
-          const achimName = content.match(/^[^:]+:/);
-          if (achimName) {
-            content = content.replace(/^[^:]+:/, '');
-            return (
-              <div key={index} className={className}>
-                <span className="font-bold text-speaker-achim">Achim:</span>
-                {content}
-              </div>
-            );
-          }
-          break;
+          // Entferne den Namen falls vorhanden (z.B. "Achim: Text" -> " Text")
+          content = content.replace(/^[^:]*:\s*/, '');
+          return (
+            <div key={index} className={className}>
+              <span className="font-bold text-speaker-achim">Achim:</span>
+              {content}
+            </div>
+          );
         default:
           className += " text-teleprompter-text";
       }
@@ -376,15 +372,15 @@ const Teleprompter: React.FC = () => {
               </Button>
             </div>
             
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                onClick={() => setIsPreviewMode(!isPreviewMode)}
-                className="flex-1 bg-teleprompter-bg border-gray-600 text-teleprompter-text hover:bg-gray-800"
-              >
-                <FileText className="w-4 h-4 mr-2" />
-                {isPreviewMode ? 'Teleprompter' : 'Vorschau'}
-              </Button>
+            <div className="flex items-center space-x-3 p-4 bg-gray-800/30 rounded-lg">
+              <Label htmlFor="preview-mode" className="text-sm font-medium">
+                Vorschau-Modus
+              </Label>
+              <Switch
+                id="preview-mode"
+                checked={isPreviewMode}
+                onCheckedChange={setIsPreviewMode}
+              />
             </div>
           </div>
           

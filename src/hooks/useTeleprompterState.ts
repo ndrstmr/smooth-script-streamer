@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 export interface ScriptItem {
-  type: 'direction' | 'speaker-a' | 'speaker-b' | 'speaker-andreas' | 'speaker-achim';
+  type: 'direction' | 'speaker-a' | 'speaker-b';
   text: string;
 }
 
@@ -26,8 +26,6 @@ export interface TeleprompterState {
   speakerAliases: {
     'speaker-a': string;
     'speaker-b': string;
-    'speaker-andreas': string;
-    'speaker-achim': string;
   };
 }
 
@@ -45,9 +43,7 @@ export const useTeleprompterState = () => {
     maxScrollDistance: 0,
     speakerAliases: {
       'speaker-a': 'Andreas',
-      'speaker-b': 'Achim', 
-      'speaker-andreas': 'Andreas',
-      'speaker-achim': 'Achim'
+      'speaker-b': 'Achim'
     }
   });
 

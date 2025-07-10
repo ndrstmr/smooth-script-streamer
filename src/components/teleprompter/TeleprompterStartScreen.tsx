@@ -168,26 +168,6 @@ export const TeleprompterStartScreen: React.FC<TeleprompterStartScreenProps> = (
                     />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="speaker-andreas">Andreas</Label>
-                    <Input
-                      id="speaker-andreas"
-                      value={state.speakerAliases['speaker-andreas']}
-                      onChange={(e) => onSpeakerAliasChange('speaker-andreas', e.target.value)}
-                      placeholder="Name für Andreas"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="speaker-achim">Achim</Label>
-                    <Input
-                      id="speaker-achim"
-                      value={state.speakerAliases['speaker-achim']}
-                      onChange={(e) => onSpeakerAliasChange('speaker-achim', e.target.value)}
-                      placeholder="Name für Achim"
-                    />
-                  </div>
-                </div>
               </CardContent>
             </Card>
           </TabsContent>

@@ -439,16 +439,22 @@ const Teleprompter: React.FC = () => {
     );
   }
 
-  // Calculate progress percentage based on script content
+  // Calculate progress based on text passing the red focus line (50% viewport height)
   const getProgress = () => {
     if (!scriptRef.current) return 0;
-    const scriptHeight = scriptRef.current.scrollHeight || scriptRef.current.clientHeight;
+    
     const viewportHeight = window.innerHeight;
-    const totalScrollableContent = scriptHeight - viewportHeight;
+    const focusLinePosition = viewportHeight * 0.5; // Red line at 50% viewport height
+    const scriptHeight = scriptRef.current.scrollHeight || scriptRef.current.clientHeight;
     
-    if (totalScrollableContent <= 0) return 0;
+    // Total distance text needs to travel to completely pass the focus line
+    // From initial position (100vh padding) to script end + focus line offset
+    const totalScrollDistance = scriptHeight + viewportHeight - focusLinePosition;
     
-    const progress = (currentPosition / totalScrollableContent) * 100;
+    if (totalScrollDistance <= 0) return 0;
+    
+    // Progress based on how much text has passed the focus line
+    const progress = (currentPosition / totalScrollDistance) * 100;
     return Math.min(100, Math.max(0, progress));
   };
 

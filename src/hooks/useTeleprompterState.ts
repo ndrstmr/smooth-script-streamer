@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 export interface ScriptItem {
-  type: 'direction' | 'speaker-a' | 'speaker-b';
+  type: 'direction' | 'speaker-a' | 'speaker-b' | 'speaker-andreas' | 'speaker-achim';
   text: string;
 }
 
@@ -23,6 +23,12 @@ export interface TeleprompterState {
   isPreviewMode: boolean;
   error: string;
   maxScrollDistance: number;
+  speakerAliases: {
+    'speaker-a': string;
+    'speaker-b': string;
+    'speaker-andreas': string;
+    'speaker-achim': string;
+  };
 }
 
 export const useTeleprompterState = () => {
@@ -36,7 +42,13 @@ export const useTeleprompterState = () => {
     bookmarks: [],
     isPreviewMode: false,
     error: '',
-    maxScrollDistance: 0
+    maxScrollDistance: 0,
+    speakerAliases: {
+      'speaker-a': 'Sprecher A',
+      'speaker-b': 'Sprecher B',
+      'speaker-andreas': 'Andreas',
+      'speaker-achim': 'Achim'
+    }
   });
 
   const { toast } = useToast();
@@ -46,12 +58,16 @@ export const useTeleprompterState = () => {
   useEffect(() => {
     const savedSpeed = localStorage.getItem('teleprompter-speed');
     const savedBookmarks = localStorage.getItem('teleprompter-bookmarks');
+    const savedAliases = localStorage.getItem('teleprompter-speaker-aliases');
     
     if (savedSpeed) {
       setState(prev => ({ ...prev, speed: parseFloat(savedSpeed) }));
     }
     if (savedBookmarks) {
       setState(prev => ({ ...prev, bookmarks: JSON.parse(savedBookmarks) }));
+    }
+    if (savedAliases) {
+      setState(prev => ({ ...prev, speakerAliases: { ...prev.speakerAliases, ...JSON.parse(savedAliases) } }));
     }
   }, []);
 
@@ -63,6 +79,10 @@ export const useTeleprompterState = () => {
   useEffect(() => {
     localStorage.setItem('teleprompter-bookmarks', JSON.stringify(state.bookmarks));
   }, [state.bookmarks]);
+
+  useEffect(() => {
+    localStorage.setItem('teleprompter-speaker-aliases', JSON.stringify(state.speakerAliases));
+  }, [state.speakerAliases]);
 
   const loadScript = useCallback(async (url: string) => {
     try {
@@ -162,6 +182,16 @@ export const useTeleprompterState = () => {
     setState(prev => ({ ...prev, currentPosition: 0, isPlaying: false }));
   }, []);
 
+  const setSpeakerAlias = useCallback((speakerType: keyof TeleprompterState['speakerAliases'], alias: string) => {
+    setState(prev => ({ 
+      ...prev, 
+      speakerAliases: { 
+        ...prev.speakerAliases, 
+        [speakerType]: alias 
+      } 
+    }));
+  }, []);
+
   return {
     state,
     availableScripts,
@@ -176,6 +206,7 @@ export const useTeleprompterState = () => {
     addBookmark,
     goToBookmark,
     handleStart,
-    handleRewind
+    handleRewind,
+    setSpeakerAlias
   };
 };

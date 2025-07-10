@@ -1,15 +1,17 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { renderScript } from '@/utils/scriptRenderer';
-import { ScriptItem } from '@/hooks/useTeleprompterState';
+import { ScriptItem, TeleprompterState } from '@/hooks/useTeleprompterState';
 
 interface TeleprompterPreviewProps {
   script: ScriptItem[];
+  speakerAliases: TeleprompterState['speakerAliases'];
   onBackToStart: () => void;
 }
 
 export const TeleprompterPreview: React.FC<TeleprompterPreviewProps> = ({
   script,
+  speakerAliases,
   onBackToStart
 }) => {
   return (
@@ -26,7 +28,7 @@ export const TeleprompterPreview: React.FC<TeleprompterPreviewProps> = ({
           </Button>
         </div>
         <div className="text-lg leading-relaxed">
-          {renderScript(script)}
+          {renderScript(script, speakerAliases)}
         </div>
       </div>
     </div>

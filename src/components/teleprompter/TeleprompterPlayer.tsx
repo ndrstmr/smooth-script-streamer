@@ -105,7 +105,7 @@ export const TeleprompterPlayer: React.FC<TeleprompterPlayerProps> = ({
           lineHeight: '1.6'
         }}
       >
-        {renderScript(state.script)}
+        {renderScript(state.script, state.speakerAliases)}
       </div>
       
       {/* Desktop controls */}

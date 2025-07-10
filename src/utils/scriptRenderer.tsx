@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScriptItem } from '@/hooks/useTeleprompterState';
+import { ScriptItem, TeleprompterState } from '@/hooks/useTeleprompterState';
 
-export const renderScript = (script: ScriptItem[]) => {
+export const renderScript = (script: ScriptItem[], speakerAliases: TeleprompterState['speakerAliases']) => {
   return script.map((item, index) => {
     let className = "mb-4 leading-relaxed";
     let content = item.text;
@@ -15,7 +15,7 @@ export const renderScript = (script: ScriptItem[]) => {
         content = content.replace(/^[^:]*:\s*/, '');
         return (
           <div key={index} className={className}>
-            <span className="font-bold text-speaker-andreas">Sprecher A: </span>
+            <span className="font-bold text-speaker-andreas">{speakerAliases['speaker-a']}: </span>
             {content}
           </div>
         );
@@ -24,7 +24,25 @@ export const renderScript = (script: ScriptItem[]) => {
         content = content.replace(/^[^:]*:\s*/, '');
         return (
           <div key={index} className={className}>
-            <span className="font-bold text-speaker-achim">Sprecher B: </span>
+            <span className="font-bold text-speaker-achim">{speakerAliases['speaker-b']}: </span>
+            {content}
+          </div>
+        );
+      case 'speaker-andreas':
+        className += " text-teleprompter-text";
+        content = content.replace(/^[^:]*:\s*/, '');
+        return (
+          <div key={index} className={className}>
+            <span className="font-bold text-speaker-andreas">{speakerAliases['speaker-andreas']}: </span>
+            {content}
+          </div>
+        );
+      case 'speaker-achim':
+        className += " text-teleprompter-text";
+        content = content.replace(/^[^:]*:\s*/, '');
+        return (
+          <div key={index} className={className}>
+            <span className="font-bold text-speaker-achim">{speakerAliases['speaker-achim']}: </span>
             {content}
           </div>
         );

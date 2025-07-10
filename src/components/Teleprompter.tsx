@@ -20,7 +20,8 @@ const Teleprompter: React.FC = () => {
     addBookmark,
     goToBookmark,
     handleStart,
-    handleRewind
+    handleRewind,
+    setSpeakerAlias
   } = useTeleprompterState();
 
   const {
@@ -55,6 +56,7 @@ const Teleprompter: React.FC = () => {
         onImportScript={handleImportScript}
         onExportScript={handleExportScript}
         onGoToBookmark={goToBookmark}
+        onSpeakerAliasChange={setSpeakerAlias}
       />
     );
   }
@@ -63,6 +65,7 @@ const Teleprompter: React.FC = () => {
     return (
       <TeleprompterPreview
         script={state.script}
+        speakerAliases={state.speakerAliases}
         onBackToStart={() => setIsStarted(false)}
       />
     );
